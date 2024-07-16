@@ -5,7 +5,7 @@ const app=express()
 const { config } =require("dotenv");
 config()
 app.use(express.json());
-app.use(cors({origin:'http://localhost:5173'}))
+app.use(cors({origin:'https://tanmay-portfolio-web.netlify.app'}))
  
 const sendEmail = async function (name, email , message) {
 

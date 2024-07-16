@@ -80,7 +80,7 @@ form.addEventListener('submit',async function(e){
     // }
     try {
         loading.classList.add('load')
-        const response=await fetch('http://localhost:4000',{
+        const response=await fetch('https://myportfolio-ekhc.onrender.com',{
             method:'POST',
             headers:{
                 'Content-Type':'application/json',
