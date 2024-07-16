@@ -48,7 +48,7 @@
   <div class="hero-details">
     <h1>Hello, Iam <p>Tanmay</p></h1>
     <h2><span id="typed"></span></h2>
-    <a href="#contact" class="explore-btn"><span> Hire me </span></a>
+    <a href="#contact"><button class="custom-btn explore-btn">Hire me</button> </a>
   </div>
   <div class="hero-image">
     <div class="image-container">
@@ -221,24 +221,26 @@
   <div class="contact-form">
     <form class="form" id="contact-form">
       <h2>Get in Touch</h2>
+      <p class="successError" id="mes"></p>
       <div class="row gy-4 gx-3 w-100">
         <div class="col-md-6">
           <label for="name">Name</label>
-          <input type="text" id='name' name="name">
+          <input type="text" id='name' name="name" required>
           </div>
           <div class="col-md-6">
           <label for="email">Email</label>
-          <input type="email" name="email" id="email">
+          <input type="email" name="email" id="email" required>
         </div>
       </div>
       <div class="row  w-100 mt-5">
         <div class="col-md-12">
           <label for="message" >Message</label>
-          <textarea id="message" name="message"></textarea>
+          <textarea id="message" name="message" required></textarea>
         </div>
       </div>
       
-      <button type="submit" class="explore-btn">Send</button>
+      <button type="submit" id="submit-btn" class="custom-btn submit-btn">Send</button>
+  
     </form>
   </div>
 </div>

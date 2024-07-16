@@ -62,7 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 const form =document.getElementById('contact-form')
-
+const loading=document.getElementById('submit-btn')
+const mes=document.getElementById('mes')
 form.addEventListener('submit',async function(e){
     e.preventDefault()
     const formData={
@@ -70,7 +71,15 @@ form.addEventListener('submit',async function(e){
         email:document.getElementById('email').value,
         message:document.getElementById('message').value
     }
+    // if(!formData.name || formData.email || formData.message){
+    //     mes.style.display='flex';
+    //     mes.innerhtml='Fields cannot be empty';
+    //     mes.style.color='red';
+    //     mes.style.backgroundColor='#8923234b';
+    //     return;
+    // }
     try {
+        loading.classList.add('load')
         const response=await fetch('http://localhost:4000',{
             method:'POST',
             headers:{
@@ -81,14 +90,29 @@ form.addEventListener('submit',async function(e){
         const res=await response.json();
         console.log(res)
         if(res.success){
-            alert('email sent')
+            mes.style.display = 'flex';
+            mes.innerHTML = 'Email sent successfully!';
+            mes.style.color = '#9dff00';
+            mes.style.backgroundColor = '#5d89234b';
+            mes.style.opacity=1;
             form.reset()
         }
         else{
-            console.log('not sent')
+            mes.style.display = 'flex';
+            mes.innerHTML = 'Email not sent. Please try again.';
+            mes.style.color = 'red';
+            mes.style.backgroundColor = '#8923234b';
+            mes.style.opacity=1;
         }
     } catch (error) {
         console.log(error)
     }
+    finally {
+        loading.classList.remove('load');
+        setTimeout(() => {
+            mes.style.display = 'none';
+          }, 5000);
+        
+      }
 })
 

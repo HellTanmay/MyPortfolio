@@ -5,7 +5,7 @@ const app=express()
 const { config } =require("dotenv");
 config()
 app.use(express.json());
-app.use(cors({origin:'https://tanmay-portfolio-web.netlify.app'}))
+app.use(cors({origin:'http://localhost:5173'}))
  
 const sendEmail = async function (name, email , message) {
 
@@ -26,21 +26,28 @@ const sendEmail = async function (name, email , message) {
         html: `<p><strong>From:</strong> ${name} &lt;${email}&gt;</p><p><b>${message}</b></p>`,
       };
       
-      await transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.error('Error:', error);
-        } else {
-          console.log('Email sent:', info.response);
-        }
+      return new Promise((resolve, reject) => {
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            console.error('Error:', error);
+            reject(error); // Reject the promise on error
+          } else {
+            console.log('Email sent:', info.response);
+            resolve(info); // Resolve the promise on success
+          }
+        });
       });
   };
 
   app.post('/',async(req,res)=>{
     try{
         const {name,email,message}=req.body
-        await sendEmail(name,email,message)
+      await sendEmail(name,email,message)
+
         res.status(200).json({success:true, message:'Message sent'})
+
     }catch(err){
+      res.status(500).json({ success: false, message: 'Failed to send message' });
         console.log(err)
     }
    
